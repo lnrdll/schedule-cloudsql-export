@@ -53,15 +53,8 @@ def main(event, context):
         cache_discovery=False
     )
     
-    d = datetime.now()
-    # format time stamp: YearMonthDayHourMinute
-    datestamp = d.strftime("%Y%m%d%H%M")
-    
-    uri = "{0}/backup-{1}-{2}.gz".format(
-    	pubsub_message['gs'],
-        pubsub_message['db'],
-        datestamp
-    )
+    datestamp = datetime.now().strftime("%Y%m%d%H%M") # format timestamp: YearMonthDayHourMinute
+    uri = "{0}/backup-{1}-{2}.gz".format(pubsub_message['gs'], pubsub_message['db'], datestamp)
     
     instances_export_request_body = {
       "exportContext": {
